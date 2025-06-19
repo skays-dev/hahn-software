@@ -13,9 +13,9 @@ public class ProductCriteria {
 
     private String description;
 
-    private String price;
+    private Double price;
 
-    private String quantity;
+    private Long quantity;
 
     private LocalDateTime dateCreation;
 

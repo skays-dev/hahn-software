@@ -18,10 +18,10 @@ public class ProductDto {
     private String description;
 
     @NotEmpty(message = "Price should be not empty")
-    private String price;
+    private Double price;
 
     @NotEmpty(message = "Quantity should be not empty")
-    private String quantity;
+    private Long quantity;
 
     private LocalDateTime dateCreation;
 

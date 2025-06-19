@@ -26,10 +26,10 @@ public class Product {
     private String description;
 
     @Column(name = "PRICE",  nullable = false)
-    private String price;
+    private Double price;
 
     @Column(name = "QUANTITY", nullable = false)
-    private String quantity;
+    private Long quantity;
 
     @Column(name = "DATE_CREATION" , nullable = false)
     private LocalDateTime dateCreation;
