@@ -23,6 +23,7 @@ import java.util.Optional;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
     @Override
     public List<ProductDto> findProductsByCriteria(ProductCriteria productCriteria) throws HahnException {
@@ -44,7 +45,8 @@ public class ProductServiceImpl implements ProductService {
 
                 return criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
             });
-            return ProductMapper.MAPPER.toDtos(productList);
+            return productMapper.toDtos(productList);
+
         } catch (Exception e) {
             throw new HahnException("Error in class ProductService while executing this method (findProductsByCriteria) productCriteria (" + productCriteria + ")", new RuntimeException(e));
         }
@@ -55,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             Optional<Product> product = productRepository.findById(id);
             if (product.isPresent()) {
-               return ProductMapper.MAPPER.toDto(product.get());
+               return productMapper.toDto(product.get());
             } else {
                 throw new FunctionalException("The product is not found with id " + id);
             }
@@ -73,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
             productDto.setDateCreation(LocalDateTime.now());
             productDto.setUserCreation(null);
 
-            return ProductMapper.MAPPER.toDto(productRepository.save(ProductMapper.MAPPER.toEntity(productDto)));
+            return productMapper.toDto(productRepository.save(productMapper.toEntity(productDto)));
         } catch (Exception e) {
             throw new HahnException("Error in class ProductService while executing this method (persistProduct) productDto (" + productDto + ")", new RuntimeException(e));
         }
@@ -89,7 +91,7 @@ public class ProductServiceImpl implements ProductService {
             productDto.setDateUpdate(LocalDateTime.now());
             productDto.setUserUpdate(null);
 
-            return ProductMapper.MAPPER.toDto(productRepository.save(ProductMapper.MAPPER.toEntity(productDto)));
+            return productMapper.toDto(productRepository.save(productMapper.toEntity(productDto)));
         } catch (FunctionalException e) {
             throw e;
         } catch (Exception e) {
@@ -97,24 +99,25 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
-
     @Override
     public ResponseDto deleteProductById(Long id) throws HahnException {
         try {
-            findProductById(id);
+            Long check = productRepository.checkProductIsExistById(id);
+
+            if (check != 1) {
+                throw new FunctionalException("The product is not found with id " + id);
+            }
 
             productRepository.deleteById(id);
 
             ResponseDto responseDto = new ResponseDto();
             responseDto.setMessage("Deleted Success");
-            return responseDto;
 
+            return responseDto;
         } catch (FunctionalException e) {
             throw e;
         } catch (Exception e) {
             throw new HahnException("Error in class ProductService while executing this method (deleteProductById) id (" + id + ")", new RuntimeException(e));
         }
     }
-
-
 }
