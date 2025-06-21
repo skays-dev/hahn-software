@@ -17,8 +17,6 @@ public abstract class AbstractDtoMapper<TDto, TEntity> implements DtoMapper<TDto
     protected Class<TDto> typeOfDto;
     protected Class<TEntity> typeOfEntity;
 
-
-    @SuppressWarnings("unchecked")
     public AbstractDtoMapper() {
         Type[] types = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments();
         typeOfDto = (Class<TDto>) types[0];
@@ -27,7 +25,6 @@ public abstract class AbstractDtoMapper<TDto, TEntity> implements DtoMapper<TDto
 
     @PostConstruct
     public void initMapper() {
-
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         modelMapper.createTypeMap(typeOfDto, typeOfEntity);
         modelMapper.createTypeMap(typeOfEntity, typeOfDto);

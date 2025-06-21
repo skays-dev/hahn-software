@@ -9,10 +9,8 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "PRODUCT", catalog = "hahn_software")
+@Table(name = "`product`", catalog = "hahn_software")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +35,7 @@ public class Product {
     @Column(name = "USER_CREATION")
     private Long userCreation;
 
-    @Column(name = "DATE_UPDATE" , nullable = false)
+    @Column(name = "DATE_UPDATE" , nullable = true)
     private LocalDateTime dateUpdate;
 
     @Column(name = "USER_UPDATE")

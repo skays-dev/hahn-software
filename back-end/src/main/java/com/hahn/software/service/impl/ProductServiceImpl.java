@@ -73,7 +73,6 @@ public class ProductServiceImpl implements ProductService {
         try {
             productDto.setId(null);
             productDto.setDateCreation(LocalDateTime.now());
-            productDto.setUserCreation(null);
 
             return productMapper.toDto(productRepository.save(productMapper.toEntity(productDto)));
         } catch (Exception e) {
