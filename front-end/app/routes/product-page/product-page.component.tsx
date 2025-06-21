@@ -6,7 +6,7 @@ const ProductPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container">
+    <div className="container" style={{width: "100%", height: "100vh"}}>
       <header className="flex justify-between">
         <h3>Products Management</h3>
         <div style={{ marginTop: "30px", marginBottom: "18px" }}>

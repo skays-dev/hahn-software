@@ -8,8 +8,7 @@ import {
 import axios from "axios";
 import type { Product } from "./Product";
 
-// Update this with your actual environment variable or fallback
-const API = "http://localhost:8081/";
+const API = "http://localhost:8080/";
 
 
 

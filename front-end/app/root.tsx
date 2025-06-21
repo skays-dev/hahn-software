@@ -33,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body style={{width: "100%", height: "100vh"}}>
         <ProductContextProvider>{children}</ProductContextProvider>
 
         <ScrollRestoration />
