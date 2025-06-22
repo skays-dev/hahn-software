@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public interface ProductService {
-    List<ProductDto> findProductsByCriteria(ProductCriteria productCriteria) throws HahnException;
+    List<ProductDto> findProducts() throws HahnException;
 
     ProductDto findProductById(Long id) throws HahnException;
 

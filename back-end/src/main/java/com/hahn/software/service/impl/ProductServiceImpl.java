@@ -11,6 +11,8 @@ import com.hahn.software.mappers.ProductMapper;
 import com.hahn.software.service.ProductService;
 import jakarta.persistence.criteria.Predicate;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,36 +21,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
+
 @Service
 public class ProductServiceImpl implements ProductService {
-    private final ProductRepository productRepository;
-    private final ProductMapper productMapper;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ProductMapper productMapper;
 
     @Override
-    public List<ProductDto> findProductsByCriteria(ProductCriteria productCriteria) throws HahnException {
+    public List<ProductDto> findProducts() throws HahnException {
         try {
-            List<Product> productList = productRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
-                List<Predicate> predicateList = new ArrayList<>();
-                if (productCriteria.getId() != null) {
-                    predicateList.add(criteriaBuilder.equal(root.get("id"), productCriteria.getId()));
-                }
-                if (productCriteria.getName() != null) {
-                    predicateList.add(criteriaBuilder.equal(root.get("name"), productCriteria.getName()));
-                }
-                if (productCriteria.getStartDate() != null) {
-                    predicateList.add(criteriaBuilder.greaterThanOrEqualTo(root.get("dateCreation"), productCriteria.getStartDate().atTime(LocalTime.MIN)));
-                }
-                if (productCriteria.getEndDate() != null) {
-                    predicateList.add(criteriaBuilder.lessThanOrEqualTo(root.get("dateCreation"), productCriteria.getEndDate().atTime(LocalTime.MAX)));
-                }
-
-                return criteriaBuilder.and(predicateList.toArray(new Predicate[0]));
-            });
-            return productMapper.toDtos(productList);
+            return productMapper.toDtos(productRepository.findAll());
 
         } catch (Exception e) {
-            throw new HahnException("Error in class ProductService while executing this method (findProductsByCriteria) productCriteria (" + productCriteria + ")", new RuntimeException(e));
+            throw new HahnException("Error in class ProductService while executing this method (findProducts)", new RuntimeException(e));
         }
     }
 
@@ -56,6 +43,8 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto findProductById(Long id) throws HahnException {
         try {
             Optional<Product> product = productRepository.findById(id);
+            System.out.println("1");
+            System.out.println(product);
             if (product.isPresent()) {
                return productMapper.toDto(product.get());
             } else {

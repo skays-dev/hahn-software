@@ -3,14 +3,12 @@ import {
   useContext,
   useState,
   useEffect,
-  type ReactNode
+  type ReactNode,
 } from "react";
 import axios from "axios";
 import type { Product } from "./Product";
 
 const API = "http://localhost:8080/";
-
-
 
 interface ProductContextType {
   data: Product[];
@@ -61,6 +59,7 @@ export function ProductContextProvider({ children }: ProductProviderProps) {
       setData((prev) => [...prev, response.data]);
     } catch (error) {
       console.error("Add item error:", error);
+      throw error;
     }
   };
 
@@ -75,6 +74,7 @@ export function ProductContextProvider({ children }: ProductProviderProps) {
       );
     } catch (error) {
       console.error("Update item error:", error);
+      throw error;
     }
   };
 
@@ -84,6 +84,7 @@ export function ProductContextProvider({ children }: ProductProviderProps) {
       setData((prev) => prev.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Delete item error:", error);
+      throw error;
     }
   };
 
@@ -108,8 +109,6 @@ export function ProductContextProvider({ children }: ProductProviderProps) {
   };
 
   return (
-    <ProductContext.Provider value={value}>
-      {children}
-    </ProductContext.Provider>
+    <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
   );
 }

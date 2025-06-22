@@ -15,5 +15,4 @@ public class ResponseDto {
     private String field;
     private Object value;
     private String reason;
-
 }

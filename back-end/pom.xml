@@ -72,6 +72,17 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 			<version>3.5.0</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock-jre8</artifactId>
+			<version>2.35.1</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
 	</dependencies>
 
 	<build>

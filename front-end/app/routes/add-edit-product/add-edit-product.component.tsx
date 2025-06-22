@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Swal from "sweetalert2";
-import type { Product } from "~/store/Product";
-import { useProductContext } from "~/store/useContext";
+import type { Product } from "../../store/Product";
+import { useProductContext } from "../../store/useContext";
 
 const AddEditProduct = () => {
   const navigate = useNavigate();
@@ -43,7 +43,8 @@ const AddEditProduct = () => {
     }
 
     if (description && (description.length < 10 || description.length > 255)) {
-      newErrors.description = "Description must be between 10 and 255 characters";
+      newErrors.description =
+        "Description must be between 10 and 255 characters";
     }
 
     if (!price) {
@@ -101,8 +102,11 @@ const AddEditProduct = () => {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: isEditMode ? "Failed to update product." : "Failed to add product.",
+        text: isEditMode
+          ? "Failed to update product."
+          : "Failed to add product.",
       });
+      throw error;
     } finally {
       setIsLoading(false);
     }
@@ -115,43 +119,60 @@ const AddEditProduct = () => {
           <h5 className="modal-title">
             {isEditMode ? "Edit Product" : "Add Product"}
           </h5>
-          <button className="close-button" onClick={() => navigate("/products")}>&times;</button>
+          <button
+            className="close-button"
+            onClick={() => navigate("/products")}
+          >
+            &times;
+          </button>
         </div>
 
         {isLoading && <div className="modal-spinner">Loading...</div>}
 
         <form onSubmit={handleSubmit} className="modal-body">
           <div className="form-group">
-            <label>Name <span className="text-danger">*</span></label>
+            <label>
+              Name <span className="text-danger">*</span>
+            </label>
             <input
               type="text"
               className="form-control"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {errors.name && <small className="text-danger">{errors.name}</small>}
+            {errors.name && (
+              <small className="text-danger">{errors.name}</small>
+            )}
           </div>
 
           <div className="form-group">
-            <label>Price <span className="text-danger">*</span></label>
+            <label>
+              Price <span className="text-danger">*</span>
+            </label>
             <input
               type="number"
               className="form-control"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
-            {errors.price && <small className="text-danger">{errors.price}</small>}
+            {errors.price && (
+              <small className="text-danger">{errors.price}</small>
+            )}
           </div>
 
           <div className="form-group">
-            <label>Quantity <span className="text-danger">*</span></label>
+            <label>
+              Quantity <span className="text-danger">*</span>
+            </label>
             <input
               type="number"
               className="form-control"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
             />
-            {errors.quantity && <small className="text-danger">{errors.quantity}</small>}
+            {errors.quantity && (
+              <small className="text-danger">{errors.quantity}</small>
+            )}
           </div>
 
           <div className="form-group">
@@ -161,11 +182,19 @@ const AddEditProduct = () => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            {errors.description && <small className="text-danger">{errors.description}</small>}
+            {errors.description && (
+              <small className="text-danger">{errors.description}</small>
+            )}
           </div>
 
           <div className="modal-footer">
-            <button type="button" className="btn btn-outline-dark" onClick={() => navigate("/products")}>Close</button>
+            <button
+              type="button"
+              className="btn btn-outline-dark"
+              onClick={() => navigate("/products")}
+            >
+              Close
+            </button>
             <button type="submit" className="btn btn-info" disabled={isLoading}>
               {isEditMode ? "Update" : "Save"}
             </button>

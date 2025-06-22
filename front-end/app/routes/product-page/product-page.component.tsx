@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router";
-import ProductList from "~/components/products-list/product-list.component";
+import ProductList from "../../components/products-list/product-list.component";
 
 const ProductPage = () => {
   const navigate = useNavigate();
