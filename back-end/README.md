@@ -37,9 +37,10 @@ This is a full-stack web application using **Spring Boot** for the backend, **Re
 ---
 ## 📦 Installation
 
+```bash
 ## 📦 Frontend Setup (React.js)
 
-```bash
+
 cd frontend
 npm install
 npm run dev         # Starts the React dev server
