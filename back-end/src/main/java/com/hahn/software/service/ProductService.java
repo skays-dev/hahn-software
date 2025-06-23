@@ -1,6 +1,5 @@
 package com.hahn.software.service;
 
-import com.hahn.software.criteria.ProductCriteria;
 import com.hahn.software.dto.ProductDto;
 import com.hahn.software.dto.ResponseDto;
 import com.hahn.software.exception.HahnException;

@@ -1,6 +1,5 @@
 package com.hahn.software.service.impl;
 
-import com.hahn.software.criteria.ProductCriteria;
 import com.hahn.software.dao.entity.Product;
 import com.hahn.software.dao.repository.ProductRepository;
 import com.hahn.software.dto.ProductDto;
@@ -9,15 +8,10 @@ import com.hahn.software.exception.FunctionalException;
 import com.hahn.software.exception.HahnException;
 import com.hahn.software.mappers.ProductMapper;
 import com.hahn.software.service.ProductService;
-import jakarta.persistence.criteria.Predicate;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
