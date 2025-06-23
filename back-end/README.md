@@ -35,6 +35,7 @@ This is a full-stack web application using **Spring Boot** for the backend, **Re
 - Unit tests with JUnit
 
 ---
+## 📦 Installation
 
 ## 📦 Frontend Setup (React.js)
 

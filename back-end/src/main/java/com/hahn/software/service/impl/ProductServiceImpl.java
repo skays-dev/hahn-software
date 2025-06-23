@@ -27,7 +27,6 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> findProducts() throws HahnException {
         try {
             return productMapper.toDtos(productRepository.findAll());
-
         } catch (Exception e) {
             throw new HahnException("Error in class ProductService while executing this method (findProducts)", new RuntimeException(e));
         }

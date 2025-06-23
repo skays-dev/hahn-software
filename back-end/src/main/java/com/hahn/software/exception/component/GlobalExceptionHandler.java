@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({Exception.class, HahnException.class, FunctionalException.class})
     public ResponseEntity<ResponseDto> exceptionHandler(Exception ex) {
 
-        // its required for display on Error Log
+        // it's required for display on Error Log
         ex.printStackTrace();
 
         if (ex instanceof FunctionalException) {
