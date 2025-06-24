@@ -30,7 +30,7 @@ This is a full-stack web application using **Spring Boot** for the backend, **Re
 - Clean and readable naming conventions
 - Meaningful and granular commit messages
 
-### ✅ Bonus: Docker Support
+### ✅ Bonus
 - Dockerfile for backend and frontend
 - Unit tests with JUnit
 
